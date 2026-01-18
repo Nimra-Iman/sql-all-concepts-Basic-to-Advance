@@ -8,7 +8,6 @@ customer_zip_code_prefix text,
        customer_state text
 );
 
-
 create table geolocation(
   geolocation_zip_code_prefix text,
   geolocation_lat double,
