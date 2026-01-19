@@ -71,9 +71,11 @@ UPDATE EMP SET DEPT = "UPDATED" WHERE SALARY>3000;
 SELECT * FROM EMP;
   
 -- SHOW THE NAME OF EMPLOYEES WHERE SALARY IS FROM 1000 TO 5000  (BETWEEN)
+
 SELECT * FROM EMP WHERE SALARY BETWEEN 1000 AND 5000;
 
 SELECT * FROM EMP WHERE E_NAME BETWEEN "ASAD" AND "NIMRA";   -- Y ALPHABETICALLY KRY GA
+
 
 -- WRITE A QUERY TO DISPLAY ALL THE DEPT NAMES ALONG WITH THE NUMBER OF EMPLOYESS WORKING IN IT:
 --  ------ ab hm yha select ko use nhi kr skty q k bhhhtttt saary departments hn, ab hm yhan pr
@@ -84,7 +86,6 @@ SELECT * FROM EMP WHERE E_NAME BETWEEN "ASAD" AND "NIMRA";   -- Y ALPHABETICALLY
 -- such as min, max, sum, avg etc.
 
 select dept, count(*) from emp group by dept;
-
 
 -- HOW TO GET SPECIFIC PART OF A STRING BEFORE A DELIMITER?
 	SELECT SUBSTRING_INDEX("www.w3schools.com", ".", 2); 
@@ -126,9 +127,13 @@ SELECT CAST(2-4 AS UNSIGNED);-- EK BHHT BRI VALUE SHOW HO GI, BIGINT IS DEFAULT
  -- MAX VALUE 1- 4,294,967,295 Y VALUE AY GI AND 
 -- IN CASE OF BIGINT (64 BITS MEANS 2^64 = 18,446,744,073,709,551,615) Y BRI VALUE SHOW HO GI 
 -- 18,446,744,073,709,551,614 WHICH IS 1- 18,446,744,073,709,551,615 
--- 
 
-CANDIDATE KEYS: 
+-- one int has a size of 32 bits, 1 bit can store 2 binary values either 0 or 1, 2 bit can 
+-- store 4 binary values such as 00,01,10,11 and we can chack kon c bit kitni binary values
+-- ko store kr skti h by using 2^number_of_bits. Now, 32 bit can store 2^32 binary values  
+
+
+-- CANDIDATE KEYS: 
 -- all unique keys of cadidate are cadidate jeys, e.g id card number, roll number, registeration number,
 -- phone number etc. but unique and not null keys are primary keys. e.g roll number, registeration
 -- number. primary key valy tuple ko kabhi bhi khali nhi chor skty, ab student k case m bhht 
@@ -138,11 +143,12 @@ CANDIDATE KEYS:
 -- forign keys:
 -- thses keys take reference from primary key. "FOREIGN KEYS ARE USED TO MAINTAIN REFERENTIAL
 -- INTEGRITY"  this is VIP question for interview. 
--- agar 2 tables apas m relate krty hn to in m koi na koi attribute same hona chahye tabhi hm unhy join kr skty
+-- agar 2 tables apas m relate krty hn to in m koi na koi attribute same 
+-- hona chahye tabhi hm unhy join kr skty
 -- jis table m primary key exist krti h us ko referenced table ya base table bolty hn and jis m 
 -- foreign key hoti h us table ko hm referencing table bolty hn
 -- forgein key m vi values ay gi vo primary key m already present hon gi. agar roll number ko hm n
--- primary key bnaya h or pk m 10 koi vaue nhi h to hm fk m bhi 10 nhi likh skty
+-- primary key bnaya h or pk m 10 koi value nhi h to hm fk m bhi 10 nhi likh skty
 -- roll number int references student (roll number) -> is trah s foreign key ko represent krty hn
 -- student is name of base table ,, or agar table already bna ho to fk is trah s lgaty:
 -- alter table table_name add constraint fk foreign key ( roll_no) references student(roll_no)
@@ -169,7 +175,7 @@ CANDIDATE KEYS:
 -- rows to use to compute the window function, THIS IS optional,
 -- yani hm btaty hn k hmy window m kon kon c rows daalni hn or jo rows 
 -- window m gi un sab pr function perform ho ga, agar m n partition nhi dia
--- to jitni rows thi table m un sab or function perform ho ga
+-- to jitni rows thi table m un sab pr function perform ho ga
 -- ROWS: is used if you furthur want to limit the rows within our
 -- partition and it is optional and mostly not used 
 
@@ -203,13 +209,13 @@ select new_id, new_cat , sum(new_id)
 over(partition by new_cat ) as sum
 from test_data order by new_id desc;
 
-select new_id, new_cat , avg(new_id) 
+select new_id, new_cat , sum(new_id) 
 over(partition by new_cat order by new_id) as sum
 from test_data ;
 -- => 1st it will partition (mean make mini tables), then sort data based on
 -- order and then apply fun()
--- => with order by: CUMULATIVE FUNCTION
--- => without order by, just partition by: TOTAL COUNT/AVG/SUM ETC
+-- => with order by: CUMULATIVE FUNCTION  *********************  VIP   ******************  
+-- => without order by, just partition by: TOTAL COUNT/AVG/SUM ETC  ***************************
 -- => min, max, count, avg, sum  ARE AGGREGATE FUNCTIONS
 
 -- -----------  rank functions  ----
@@ -238,7 +244,7 @@ from test_data ;
 -- and last vali ka 1 ho ga
 
 --  jo cheex order by m den gy us ki
--- base pr y vala duplication and skip vala concept lgy ga 
+-- base pr y vala duplication and skip vala concept lgy ga   *****************************
 
 select new_cat , new_id,
  row_number() over( order by new_id) as "row_number", 
@@ -327,7 +333,27 @@ from test_data;
 
 
 
--- ------------------  RECURSIVE CTEs  -------------------
+--     OFFSET
+
+-- OFFSET is mainly used with LIMIT in MySQL to skip a certain number of rows.
+
+-- Example:
+-- SELECT salary
+-- FROM employees
+-- WHERE department = 'IT'
+-- ORDER BY salary DESC
+-- LIMIT 1 OFFSET 1;
+
+-- ORDER BY salary DESC → sorts IT salaries from highest to lowest
+-- LIMIT 1 → selects 1 row
+-- OFFSET 1 → skips the first row (highest salary)
+-- Result → gives the second highest salary
+-- Use cases:
+-- Pagination: Show 10 records per page in a web app.
+-- SELECT * FROM employees ORDER BY emp_id LIMIT 10 OFFSET 20;
+-- → gets rows 21–30. 
+
+------------------  RECURSIVE CTEs  -------------------
 -- UNION ALL:  it just combine all data, irrespective of whether the duplicate
 -- 			rows present or not. It is faster as compared to UNION because
 -- 			it does not do extra task
