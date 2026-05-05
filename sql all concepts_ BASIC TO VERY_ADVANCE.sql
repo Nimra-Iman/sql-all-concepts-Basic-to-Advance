@@ -14,7 +14,7 @@
 -- ORDER BY         -- 8. (Optional) Sort results
 -- LIMIT / OFFSET   -- 9. (Optional) Limit the number of rows
 
- 
+
 create database vip;
 use vip;
 CREATE TABLE emp (
@@ -96,8 +96,8 @@ select dept, count(*) from emp group by dept;
 --     TO 2ND TIME Y DELIMITER ANY S PHLY PHLY VALA SARA TEXT DE DETA, IF WE
 --     WRITE NEGATIVE NUMBER HERE THEN WORKING START FROM RIGHT SIDE`
     
- select locate('W', 'helloWorld')  -- location of w in the given string
- select SUBSTRING('helloworld', 6) -- start from 6th position and 
+ select locate('W', 'helloWorld') ; -- location of w in the given string
+ select SUBSTRING('helloworld', 6); -- start from 6th position and 
 								-- give me the rest of string
 
 SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com'); -- WILL GIVE 1ST 
@@ -297,8 +297,6 @@ lead(new_id) over ( partition by new_cat order by new_id ) from test_data;
 select new_id, new_cat,
 lag(new_id) over ( partition by new_cat order by new_id ) from test_data;
 
-
-
 select new_id, new_cat,
 lead(new_id,2 ) over ( partition by new_cat order by new_id ) from test_data;
 -- lead(new_id,2 ) to increase upto 2 jumps
@@ -376,7 +374,7 @@ SELECT * FROM CTE_NAME;
 
 -- EXAMPLE:
 CREATE TABLE employees (
-emp_id serial PRIMARY KEY,
+emp_id serial PRIMARY KEY,-- SERIAL is just an alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE
 emp_name VARCHAR(20) NOT NULL,
 manager_id INT );
 
@@ -399,6 +397,11 @@ SELECT EMPLOYEES.EMP_ID, EMPLOYEES.EMP_NAME, EMPLOYEES.MANAGER_ID
 FROM EMPLOYEES JOIN CTE_TABLE 
 ON EMPLOYEES.EMP_ID = CTE_TABLE.MANAGER_ID
 ) SELECT * FROM CTE_TABLE;
+
+
+ 
+
+
 
 
 
