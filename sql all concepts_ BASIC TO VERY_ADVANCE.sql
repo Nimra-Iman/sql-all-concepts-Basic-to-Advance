@@ -50,7 +50,7 @@ insert into emp(age) values (2),(3),(4); -- this line generate error because usy
 
 
 
--- slect distinct
+-- select distinct
 SELECT DISTINCT DEPT FROM EMP;
 
 -- WHERE (FOR CONDITION)
@@ -103,7 +103,10 @@ select dept, count(*) from emp group by dept;
 SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com'); -- WILL GIVE 1ST 
 -- NON-NULL VALUE IN STRING
 
--- TO CHNAGE ONE DATATYPE TO OTHER BY CAST() FUNCTION
+-- TO CHNAGE ONE DATATYPE TO OTHER BY CAST() FUNCTION, Cast will only change the data
+-- type temporarily, means it will change
+-- the data type for that specific query only. 
+
 -- The MySQL CAST() function is used for converting a value from one datatype 
 -- to another specific datatype. The CAST() function accepts two parameters which 
 -- are the value to be converted and the datatype to which the value needs to be converted. 
@@ -122,15 +125,17 @@ SELECT CAST(2-4 AS UNSIGNED);-- EK BHHT BRI VALUE SHOW HO GI, BIGINT IS DEFAULT
 --  NEVER BE A NEGATIVE VALUE, AGR NEGATIVE VALUE ADD HUI TO OUTPUT M BHHHTTTT
 --  BRI VALUE AY GI,,,,,,   AB BAAT ATI H BHHHTTT BRI VALUE KI, AGR DATATYPE INT H
 --  TO VO 32 BITS ka size rkhti h AND EACH BIT IS EITHER 1 OR 0, SO ONE INT VALUE MEANS 32 BITS
- -- AND ITS DECIMAL VALUE IS 2^32 = 4,294,967,295 SO IS CASE OF: INT AGE UNSIGNED, AND AGR 
+ -- AND  2^32 = 4,294,967,295 (means it can store this number of binary digit combinations)
+ -- SO IS CASE OF: INT AGE UNSIGNED, AND AGR 
  -- AGR NEGATIVE A GI TO OUTPUT M US NEGATIVE AGE KI JGA 4,294,967,294 (WHICH IS ITS 
  -- MAX VALUE 1- 4,294,967,295 Y VALUE AY GI AND 
--- IN CASE OF BIGINT (64 BITS MEANS 2^64 = 18,446,744,073,709,551,615) Y BRI VALUE SHOW HO GI 
--- 18,446,744,073,709,551,614 WHICH IS 1- 18,446,744,073,709,551,615 
+-- IN CASE OF BIGINT (64 BITS MEANS 2^64 = 18,446,744,073,709,551,615 combinations) Y BRI
+-- VALUE SHOW HO GI 18,446,744,073,709,551,614 WHICH IS 1- 18,446,744,073,709,551,615 
 
 -- one int has a size of 32 bits, 1 bit can store 2 binary values either 0 or 1, 2 bit can 
--- store 4 binary values such as 00,01,10,11 and we can chack kon c bit kitni binary values
--- ko store kr skti h by using 2^number_of_bits. Now, 32 bit can store 2^32 binary values  
+-- store 4 types of 2 binary digits such as 00 or 01 or 10 or 11 and we can check kon c bit 
+-- kitni binary value ko store kr skti h by using 2^number_of_bits. Now, 32 bit can
+-- store 2^32 combinations of 32 binary values  
 
 
 -- CANDIDATE KEYS: 
