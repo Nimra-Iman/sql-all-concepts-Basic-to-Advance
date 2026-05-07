@@ -31,6 +31,17 @@ INSERT INTO duplicated_rows (id, name, age) VALUES
 -- m (1, ali, 20) vali saari rows jayn gi :
 select id, name, age, count(*) from duplicated_rows group by id, name, age having count(*)>1;
 
+--  **********************************   3- **************************************
+-- WHERE CANNOT USE AGGREGATE FUNCTIONS:
+-- SELECT * FROM TABLE_NAME WHRE MAX(ID);   --ERROR 
+
+
+-- ****************************  4- ********************************
+
+
+
+
+
 
 
 
