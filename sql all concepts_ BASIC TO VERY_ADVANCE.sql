@@ -114,6 +114,15 @@ SELECT COALESCE(NULL, NULL, NULL, 'W3Schools.com', NULL, 'Example.com'); -- WILL
 -- UNSIGNED DATATYPE: ACCEPT ONLY POSITIVE VALUES
 -- SIGNED: ACCEPT BOTH POSITIVE AND NEGATIVE VALUES
 
+select cast(column_name as unsigned)+1000 from table_name; -- e.g: i have salaries in the form of text, and 
+-- i I want to add 1000 to each salary amount but this is not possible in the form of text 
+-- so I will use cast to temporarily convert string into int. 
+select cast(column_name as char) from table_name; -- column_name has type int, and i wanna show it in the 
+-- form of text,, My SQL cast function mostly accept unsigned, signed (text to numerical) and 
+-- char(numerical to text). 
+select concat(cast(salary_col_with_char_dt as signed) , "$") from table_name;  -- salary col has 
+-- text datatype and want to show it in numbers, so used cast with signed,
+-- want eacha mount concatenated with $ , now final output will be text again, hahaha ;)
 SELECT CAST(2-4 AS UNSIGNED);-- EK BHHT BRI VALUE SHOW HO GI, BIGINT IS DEFAULT 
 
 -- SIGNED AND UNSIGNED ARE MODIFIERS THAT TELL SQL HOW TO STORE VALUES, SIGNED CAN 
@@ -170,7 +179,7 @@ SELECT CAST(2-4 AS UNSIGNED);-- EK BHHT BRI VALUE SHOW HO GI, BIGINT IS DEFAULT
 
 -- SELECT Customers.CustomerName, Orders.OrderID FROM Customers LEFT JOIN Orders
 -- ON Customers.CustomerID = Orders.CustomerID
-    
+
 --  ---------------------------  WINDOW FUNCTIONS  ---------------------------------------
 -- window functions apply aggregate, ranking and analytic functions
 -- over a specific window
@@ -189,7 +198,6 @@ SELECT CAST(2-4 AS UNSIGNED);-- EK BHHT BRI VALUE SHOW HO GI, BIGINT IS DEFAULT
 -- e.g:
 -- BASIC SYNTAX:  select col1, col2, fun() over( partition by, order by, rows)
 -- from table_name;
-
 
 
 use test;
@@ -246,7 +254,7 @@ from test_data ;
 -- nhi kry ga, yani value shiza ai to dense rank 3 hi rkhy ga 4 nhi rkhy ga
 -- PERCENT RANK(): yani kitny percent rows ap k data m fulfill ho chuki hn
 -- yani window m mojood first row ka percent rank 0 ho ga, mis vali ka 0.5
--- and last vali ka 1 ho ga
+-- and last vali ka 1 ho ga 
 
 --  jo cheex order by m den gy us ki
 -- base pr y vala duplication and skip vala concept lgy ga   *****************************
@@ -261,10 +269,14 @@ from test_data; -- over k ander kam s kam koi ek parameter zrur do vrna
  
  
 SELECT new_cat,
-       RANK() OVER (ORDER BY new_cat) AS "rank"
+       RANK() OVER (partition by new_cat ORDER BY new_cat) AS "rank"
 FROM test_data;
  
  
+SELECT new_cat,
+       RANK() OVER (ORDER BY new_cat) AS "rank"
+FROM test_data;
+
 select new_cat , new_id,
  row_number() over(partition by new_cat order by new_id) as "row_number", 
  rank() over(partition by new_cat order by new_id) as "rank", 
@@ -289,6 +301,10 @@ from test_data;
 -- to last value poora column as it is show kr deti h 
 -- lead:  show next value
 -- lag: show previous value
+-- It is necessary to use ORDER BY with these functions otherwise the result
+-- wrong. If we have a new ID and a new category, 'order by' by 'new_id' first of all
+--  will order by elements of 'new ID' inside each category and then lead, lag, 1st_value, 
+-- last_value de ga, yani y functions sorted data pr kam krty hn. 
 
 select new_id, new_cat,
 first_value(new_id) over(order by new_id) from test_data;
@@ -308,6 +324,9 @@ lead(new_id,2 ) over ( partition by new_cat order by new_id ) from test_data;
 
 select new_id, new_cat,
 lag(new_id ,2) over ( partition by new_cat order by new_id ) from test_data;
+
+select new_id, new_cat,
+lead(new_id) over ( partition by new_cat ) from test_data;
 
 
 SELECT new_id, new_cat,
@@ -333,6 +352,16 @@ select new_cat, new_id, last_value(new_id)
 over(partition by new_cat order by new_id 
 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) as true_last_val
 from test_data;
+
+
+-- Making a long story short: in aggregate functions, if you don't use order by, 
+-- we will get good results, but if we use order by, we will use cumulative results.  
+-- Then, in the rank functions order by is important to write, because if you do not
+-- use order by, each row will be considered equal and we will get rank 1. It doesn't 
+-- matter which function from the rank functions category we will use. Now comes 
+-- analytic or value functions. Row number is important to write because it will sort 
+-- data first and then will give us the value of last value, first value, lead and 
+-- lag value. If you do not use order by, we will use wrong results or unpredictable results. 
 
 
 
