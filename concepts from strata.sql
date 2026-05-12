@@ -35,8 +35,15 @@ select id, name, age, count(*) from duplicated_rows group by id, name, age havin
 -- WHERE CANNOT USE AGGREGATE FUNCTIONS:
 -- SELECT * FROM TABLE_NAME WHRE MAX(ID);   --ERROR 
 
+-- **********************************  4-  *********************************************
+-- agr y dekhn ah k jab ek specific column ki y y values hin gi to koi chees calculate kro
+-- is k liye where k saath IN lgana h, 
+select sum(sales_revenue) from sales_performance where salesperson in ( "Samantha",  "Lisa");  
 
--- ****************************  4- ********************************
+-- ***************************************** 5- *********************************
+-- We can use some aggregate functions such as `sum`, `max`, `min`, etc. without `GROUP BY`, but koi bhi 
+-- dusra column saath selected na ho, yani SELECT k baad just vhi column ho jis pr aggregate function 
+-- apply kia h  
 
 
 
