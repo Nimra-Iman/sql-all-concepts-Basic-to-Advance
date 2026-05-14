@@ -33,7 +33,7 @@ select id, name, age, count(*) from duplicated_rows group by id, name, age havin
 
 --  **********************************   3- **************************************
 -- WHERE CANNOT USE AGGREGATE FUNCTIONS:
--- SELECT * FROM TABLE_NAME WHRE MAX(ID);   --ERROR 
+-- SELECT * FROM TABLE_NAME WHERE MAX(ID);   --ERROR 
 
 -- **********************************  4-  *********************************************
 -- agr y dekhn ah k jab ek specific column ki y y values hin gi to koi chees calculate kro
@@ -45,6 +45,10 @@ select sum(sales_revenue) from sales_performance where salesperson in ( "Samanth
 -- dusra column saath selected na ho, yani SELECT k baad just vhi column ho jis pr aggregate function 
 -- apply kia h  
 
+-- ***********************************   6-   ********************************************
+-- limit used to get just specific number of rows, e.g: to get just 1st row
+
+-- ******************************   7-   *********************************
 
 
 
