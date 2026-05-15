@@ -42,13 +42,52 @@ select sum(sales_revenue) from sales_performance where salesperson in ( "Samanth
 
 -- ***************************************** 5- *********************************
 -- We can use some aggregate functions such as `sum`, `max`, `min`, etc. without `GROUP BY`, but koi bhi 
--- dusra column saath selected na ho, yani SELECT k baad just vhi column ho jis pr aggregate function 
--- apply kia h  
+-- dusra column saath selected na ho, yani SELECT k baad just vhi column/columns ho jis pr aggregate function 
+-- apply kia h , e.g: select min(col1), max(col1) from table gives correct answer 
 
 -- ***********************************   6-   ********************************************
 -- limit used to get just specific number of rows, e.g: to get just 1st row
 
 -- ******************************   7-   *********************************
+-- window function never reduce number of rows, if you have 7 rows and you wanna counmt the the sopcific
+-- occurance of sometihing from a column, and that thing appears 3 times, then count with window function will 
+-- provide that row three times in the output, that's why use distinct if you wanty to show the specific
+-- row single time, e.g: following code provide the following output:
+select  trackname , count(position) over(partition by trackname ) as times_ranked from 
+spotify_worldwide_daily_song_ranking where position  = 1 order by times_ranked desc ;
+-- the output is: 
+-- trackname	times_ranked
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- HUMBLE.	7
+-- Bad and Boujee (feat. Lil Uzi Vert)	1
+-- Look What You Made Me Do	1
+-- ----------------BUT we want to show the output just one time, we will use distinct(trackname)
+-- trackname	times_ranked
+-- HUMBLE.	7
+-- Bad and Boujee (feat. Lil Uzi Vert)	1
+-- Look What You Made Me Do	1
+
+--  ************************************ 8-  **************************************
+-- Use parentheses when we have to use both and & or, as 'and' will is interpreted first.
+select name from olympics_athletes_events where age>40 and (medal = 'Bronze' or medal = 'Silver');
+-- Without parentheses they will provide results when (age is greater than 40 and the medal is bronze) or when
+-- medal is silver. 
+
+-- ***************************  9-  ******************************** 
+
+
+
+
+
+
+
+
+
 
 
 
