@@ -1,1 +1,1 @@
-this contains sql basic and data analysis projects using sql
+this contains sql all concepts from basic to advance, good to interview prep
