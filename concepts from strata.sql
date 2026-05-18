@@ -53,6 +53,7 @@ select sum(sales_revenue) from sales_performance where salesperson in ( "Samanth
 -- occurance of sometihing from a column, and that thing appears 3 times, then count with window function will 
 -- provide that row three times in the output, that's why use distinct if you wanty to show the specific
 -- row single time, e.g: following code provide the following output:
+
 select  trackname , count(position) over(partition by trackname ) as times_ranked from 
 spotify_worldwide_daily_song_ranking where position  = 1 order by times_ranked desc ;
 -- the output is: 
@@ -79,8 +80,21 @@ select name from olympics_athletes_events where age>40 and (medal = 'Bronze' or 
 -- medal is silver. 
 
 -- ***************************  9-  ******************************** 
-
-
+select date(date_column) from table_name;
+select year(date_column) from table_name;
+select month(date_column) from table_name;
+select datediff("2024-12-3","2025-4-1") from table_name; -- will give days differnce,
+-- If the first rate is smaller and the second rate is larger, we will still get a positive value. 
+ 
+ -- *************************  10-   ********************************
+ -- If we have more than two conditions, don't use WHERE two times. Just write one
+ -- WHERE then condition and then condition just. 
+ 
+ select * from google_file_store
+where contents like "%optimism%" and age>3;
+ 
+ -- ************************ 11--  ******************************
+ 
 
 
 

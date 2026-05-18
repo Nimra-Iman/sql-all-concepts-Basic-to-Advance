@@ -76,6 +76,13 @@ SELECT * FROM EMP WHERE SALARY BETWEEN 1000 AND 5000;
 
 SELECT * FROM EMP WHERE E_NAME BETWEEN "ASAD" AND "NIMRA";   -- Y ALPHABETICALLY KRY GA
 
+--  _________________________LIKE CONCEPT:
+-- % MEANS zero or more characters,, _ means exactly one character
+select * from table_name where std_name like "_a%" -- yani dusra character a ho and agy kuch
+-- bhi ho
+-- start 's', end 'h', 6 letters : LIKE 's____h'
+-- Exactly 5 letters:  LIKE '_____' OR LENGTH(name) = 5
+
 
 -- WRITE A QUERY TO DISPLAY ALL THE DEPT NAMES ALONG WITH THE NUMBER OF EMPLOYESS WORKING IN IT:
 --  ------ ab hm yha select ko use nhi kr skty q k bhhhtttt saary departments hn, ab hm yhan pr
