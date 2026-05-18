@@ -1,1 +1,1 @@
-this contains sql all concepts from basic to advance, good to interview preparation
+this contains sql all concepts from basic to advance, best to interview preparation
